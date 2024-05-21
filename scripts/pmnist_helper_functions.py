@@ -233,12 +233,13 @@ def display_pmnist_perturbation(filename, index, verbose = True):
   # START = 8 + (index*2) + 1 (13)
   key = read_bytes_from_file(filename, num_bytes, key_start, verbose)
   key_index = int(key, 16)
-  if key_index == 255: # 0xFF, clean image
+  if verbose and key_index == 255: # 0xFF, clean image
     print("Original image, not perturbed.")
     return
   key = get_key_by_index(key_index)
   level = read_bytes_from_file(filename, num_bytes, level_start, verbose)
-  print("In file: {}, for index: {}, key index: {}, key is {}, level is {}".format(filename, index, key_index, key, level))
+  if verbose:
+      print("In file: {}, for index: {}, key index: {}, key is {}, level is {}".format(filename, index, key_index, key, level))
 
 def random_perturbation(img):
   """
@@ -591,6 +592,7 @@ def gen_pmnist_dataset_all_possibilities(img_path, lbl_path, pmnist_img, pmnist_
             if verbose:
                 print("Saved perturbed image to perturbed image dataset: {}".format(perturbed_train_images_idx3_ubyte))
             # 4. save the label to the perturbed label dataset (again)
+            num_bytes = 1
             append_bytes_to_file(perturbed_train_labels_idx1_ubyte, label, num_bytes)    
             if verbose:
                 print("Saved label to perturbed labels dataset: {}".format(perturbed_train_labels_idx1_ubyte))
