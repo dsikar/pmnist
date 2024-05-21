@@ -25,13 +25,13 @@ test_set = datasets.MNIST(root='./data', download=True, train=False, transform=t
 # create files
 init_perturbed_mnist_files(
         perturbed_train_images_file='perturbed-train-images-idx3-ubyte',
-        perturbed_test_images_file='t1260k-perturbed-images-idx3-ubyte',
+        perturbed_test_images_file='t1210k-perturbed-images-idx3-ubyte',
         perturbed_train_labels_file='perturbed-train-labels-idx1-ubyte',
-        perturbed_test_labels_file='t1260k-perturbed-labels-idx1-ubyte',
+        perturbed_test_labels_file='t1210k-perturbed-labels-idx1-ubyte',
         perturbation_train_levels_file='perturbation-train-levels-idx0-ubyte',
-        perturbation_test_levels_file='t1260k-perturbation-levels-idx0-ubyte',
+        perturbation_test_levels_file='t1210k-perturbation-levels-idx0-ubyte',
         num_train_files=7260000,
-        num_test_files=1260000,
+        num_test_files=1210000,
         verbose=True)
 
 # process training dataset
