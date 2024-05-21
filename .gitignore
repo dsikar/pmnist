@@ -1,0 +1,8 @@
+# data files
+*ubyte
+# cache files
+__pycache__
+# data
+data
+# link to utils
+utils
