@@ -691,3 +691,65 @@ def init_perturbed_mnist_files(
     ]
     create_mnist_file(perturbation_test_levels_file, header_info, verbose)
     print("====================================")
+
+def plot_perturbations(perturbations):
+    """
+    Plot perturbations
+    Arguments:
+    perturbations: expecting a list of tuples (image, perturbation_type, perturbation_level) with 120 elements
+    to then be displayed in a 12x10 grid
+    """
+    # Get the unique perturbation types
+    perturbation_types = sorted(set(p[1] for p in perturbations))
+
+    # Create a figure and subplots with horizontal spacing
+    fig, axes = plt.subplots(nrows=12, ncols=10, figsize=(20, 36))
+    fig.subplots_adjust(wspace=0.1)  # Adjust the horizontal spacing
+
+    # Iterate over the perturbation types and plot the images
+    for i, perturbation_type in enumerate(perturbation_types):
+        # Get the perturbations for the current type
+        type_perturbations = [p for p in perturbations if p[1] == perturbation_type]
+
+        # Plot the images for the current perturbation type
+        for j, perturbation in enumerate(type_perturbations):
+            image, _, _ = perturbation
+            axes[i, j].imshow(image, cmap='gray')
+            axes[i, j].axis('off')
+
+    # Adjust the spacing between subplots
+    plt.tight_layout()
+
+    # Display the plot
+    plt.show()
+
+def plot_images_and_histograms(image_data):
+    fig, axes = plt.subplots(2, 10, figsize=(20, 4))
+    fig.subplots_adjust(hspace=0.4, wspace=0.1)
+
+    for i, (image, perturbation_type, intensity) in enumerate(image_data):
+        # Plot the image on the first row
+        axes[0, i].imshow(image, cmap='gray')
+        axes[0, i].axis('off')
+
+        # Plot the histogram on the second row
+        axes[1, i].hist(image.ravel(), bins=50, range=(0, 255), color='black')
+        axes[1, i].set_xlim(0, 255)
+        axes[1, i].set_xticks([])
+        axes[1, i].set_yticks([])
+
+        # Set the perturbation type as the title for each column
+        if i == 0:
+            axes[0, i].set_title(perturbation_type)
+        else:
+            axes[0, i].set_title('')
+
+        # Set the perturbation intensity as the x-axis label for the second row
+        axes[1, i].set_xlabel(f'Intensity: {intensity+1}')
+
+    # Remove y-axis labels for both rows
+    for ax in axes.flat:
+        ax.set_ylabel('')
+
+    plt.tight_layout()
+    plt.show()
