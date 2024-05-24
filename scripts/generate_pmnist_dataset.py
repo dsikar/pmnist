@@ -15,8 +15,8 @@ transform = transforms.Compose([transforms.ToTensor(),
                                 transforms.Normalize((0.5,), (0.5,))])
 
 # Download the MNIST dataset
-train_set = datasets.MNIST(root='./data', download=True, train=True, transform=transform)
-test_set = datasets.MNIST(root='./data', download=True, train=False, transform=transform)
+train_set = datasets.MNIST(root='./data', download=False, train=True, transform=transform)
+test_set = datasets.MNIST(root='./data', download=False, train=False, transform=transform)
 
 ####################
 # Helper functions #

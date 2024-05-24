@@ -165,6 +165,41 @@ def display_mnist_lbl(filename, index, verbose = False):
         lbl = read_bytes_from_file(filename, num_bytes, start, verbose)
         print("In file {}, label index {} is {}".format(filename, index, lbl))
 
+def get_mnist_byte(filename, index, verbose=False):
+    """
+    Get the byte value at a given index in the MNIST binary file.
+
+    Parameters
+    ==========
+    filename: string, the MNIST binary file
+    index: the index of the byte to retrieve
+    verbose: boolean, display debug info (default: False)
+
+    Returns
+    =======
+    byte_value: int, the byte value at the specified index
+
+    Example
+    =======
+    mnist_file = 'data/MNIST/raw/train-images-idx3-ubyte'
+    index = 16
+    byte_value = get_mnist_byte(mnist_file, index)
+    print(byte_value)
+    """
+    num_bytes = 1
+    start = 8+index
+
+    # Check if the index is within bounds
+    file_size = os.path.getsize(filename)
+    if file_size < start + num_bytes:
+        raise IndexError("The specified index {} is out of bounds for the file.".format(index))
+
+    byte_value = read_bytes_from_file(filename, num_bytes, start, verbose)
+    if verbose:
+        print("In file {}, label index {} is {}".format(filename, index, byte_value))
+
+    return byte_value
+
 def display_mnist_img(filename, index, verbose = False):
     """
     Display image and histogram at a given index
@@ -209,7 +244,7 @@ def display_pmnist_perturbation(filename, index, verbose = True):
   index = 0
   verbose = True
   display_pmnist_perturbation(pmnist_perturbations, index, verbose)
-  """
+  """  
   num_bytes = 1
   key_start = 8 + (index * 2)
   level_start = 8 + (index * 2) + 1
