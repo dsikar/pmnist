@@ -56,7 +56,7 @@ img_path = 'data/MNIST/raw/t10k-images-idx3-ubyte'
 lbl_path = 'data/MNIST/raw/t10k-labels-idx1-ubyte'
 pmnist_img = 't1210k-perturbed-images-idx3-ubyte'
 pmnist_lbl = 't1210k-perturbed-labels-idx1-ubyte'
-pmnist_perturbations = 't1260k-perturbation-levels-idx0-ubyte'
+pmnist_perturbations = 't1210k-perturbation-levels-idx0-ubyte'
 num_files = 10000
 verbose = False
 gen_pmnist_dataset_all_possibilities(img_path, lbl_path, pmnist_img, pmnist_lbl, pmnist_perturbations, num_files, verbose)
