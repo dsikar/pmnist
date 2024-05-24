@@ -1,8 +1,6 @@
-# data files
-*ubyte
 # cache files
 __pycache__
-# data
-data/MNIST
 # link to utils
 utils
+# data directory
+data

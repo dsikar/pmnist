@@ -34,7 +34,13 @@ init_perturbed_mnist_files(
         num_test_files=1210000,
         verbose=True)
 
-# process training dataset
+# process training dataset # STOPPED HERE 0. Change perturbation type and level to a byte value - DONE
+#                                         1. process PMNIST testing dataset saving sofmax values label, prediction, pertubation type and level
+#                                         2. Create perturbations for CIFAR10
+#                                         3. Create perturbed CIFAR10 dataset
+#                                         4. process CIFAR-10 dataset saving sofmax values label, prediction, pertubation type and level
+#                                         5. Add KL, BD and HI to PMNISt and CIFAR-10 predictions
+#                                         6. Create 2D plots for PMNIST and CIFAR-10
 img_path = 'data/MNIST/raw/train-images-idx3-ubyte'
 lbl_path = 'data/MNIST/raw/train-labels-idx1-ubyte'
 pmnist_img = 'perturbed-train-images-idx3-ubyte'
@@ -42,13 +48,14 @@ pmnist_lbl = 'perturbed-train-labels-idx1-ubyte'
 pmnist_perturbations = 'perturbation-train-levels-idx0-ubyte'
 num_files = 60000
 verbose = False
-gen_pmnist_dataset_all_possibilities(img_path, lbl_path, pmnist_img, pmnist_lbl, pmnist_perturbations, num_files, verbose)
+#gen_pmnist_dataset_all_possibilities(img_path, lbl_path, pmnist_img, pmnist_lbl, pmnist_perturbations, num_files, verbose)
 
+# Only generate testing dataset perturbations
 # process testing dataset
 img_path = 'data/MNIST/raw/t10k-images-idx3-ubyte'
 lbl_path = 'data/MNIST/raw/t10k-labels-idx1-ubyte'
-pmnist_img = 't1260k-perturbed-images-idx3-ubyte'
-pmnist_lbl = 't1260k-perturbed-labels-idx1-ubyte'
+pmnist_img = 't1210k-perturbed-images-idx3-ubyte'
+pmnist_lbl = 't1210k-perturbed-labels-idx1-ubyte'
 pmnist_perturbations = 't1260k-perturbation-levels-idx0-ubyte'
 num_files = 10000
 verbose = False

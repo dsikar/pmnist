@@ -591,15 +591,17 @@ def gen_pmnist_dataset_all_possibilities(img_path, lbl_path, pmnist_img, pmnist_
             append_single_image_to_file(perturbed_train_images_idx3_ubyte, p_img)
             if verbose:
                 print("Saved perturbed image to perturbed image dataset: {}".format(perturbed_train_images_idx3_ubyte))
-            # 4. save the label to the perturbed label dataset (again)
+            #                                                    save the label to the perturbed label dataset (again)
             num_bytes = 1
             append_bytes_to_file(perturbed_train_labels_idx1_ubyte, label, num_bytes)    
             if verbose:
                 print("Saved label to perturbed labels dataset: {}".format(perturbed_train_labels_idx1_ubyte))
             # 6. save the perturbation type and level for the perturbed image
             num_bytes = 1
-            append_bytes_to_file(perturbation_train_levels_idx0_ubyte, key_index, num_bytes)
-            append_bytes_to_file(perturbation_train_levels_idx0_ubyte, level, num_bytes)
+            pval = pack_perturbation_info(key_index, level)
+            append_bytes_to_file(perturbation_train_levels_idx0_ubyte, pval, num_bytes)
+            #append_bytes_to_file(perturbation_train_levels_idx0_ubyte, key_index, num_bytes)
+            #append_bytes_to_file(perturbation_train_levels_idx0_ubyte, level, num_bytes)
             if verbose:
                 print("Saved key and level to perturbed levels dataset")
         if verbose:
@@ -753,3 +755,60 @@ def plot_images_and_histograms(image_data):
 
     plt.tight_layout()
     plt.show()
+
+def pack_perturbation_info(perturbation_type, intensity):
+    """
+    Pack the perturbation type and intensity into a single byte.
+
+    Parameters:
+    - perturbation_type (int): Perturbation type, ranging from 1 to 12.
+    - intensity (int): Intensity value, ranging from 1 to 10.
+
+    Returns:
+    - packed_byte (int): The packed byte containing the perturbation type and intensity.
+
+    Raises:
+    - ValueError: If perturbation_type is not in the range of 1 to 12 or intensity is not in the range of 1 to 10.
+    """
+    if not 1 <= perturbation_type <= 12:
+        raise ValueError("perturbation_type must be in the range of 1 to 12.")
+    if not 1 <= intensity <= 10:
+        raise ValueError("intensity must be in the range of 1 to 10.")
+
+    packed_byte = (perturbation_type << 4) | intensity
+    return packed_byte
+
+
+def unpack_perturbation_info(packed_byte):
+    """
+    Unpack the perturbation type and intensity from a single byte.
+
+    Parameters:
+    - packed_byte (int): The packed byte containing the perturbation type and intensity.
+
+    Returns:
+    - perturbation_type (int): Perturbation type, ranging from 1 to 12.
+    - intensity (int): Intensity value, ranging from 1 to 10.
+    """
+    perturbation_type = packed_byte >> 4
+    intensity = packed_byte & 0x0F
+    return perturbation_type, intensity
+
+def display_bit_pattern(packed_byte):
+    """
+    Display the bit pattern of a byte.
+
+    Parameters:
+    - packed_byte (int): The byte to display the bit pattern for.
+
+    Returns:
+    - bit_pattern (str): The binary representation of the byte.
+    
+    # Example usage
+    packed_byte = pack_perturbation_info(5, 3)
+    bit_pattern = display_bit_pattern(packed_byte)
+    print("Packed byte:", packed_byte)
+    print("Bit pattern:", bit_pattern)    
+    """
+    bit_pattern = bin(packed_byte)[2:].zfill(8)
+    return bit_pattern
