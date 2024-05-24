@@ -7,3 +7,5 @@ data
 # hpc specific
 .python-version
 scripts/outputs/
+# data files
+*ubyte
