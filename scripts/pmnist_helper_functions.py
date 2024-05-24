@@ -770,10 +770,10 @@ def pack_perturbation_info(perturbation_type, intensity):
     Raises:
     - ValueError: If perturbation_type is not in the range of 1 to 12 or intensity is not in the range of 1 to 10.
     """
-    if not 1 <= perturbation_type <= 12:
-        raise ValueError("perturbation_type must be in the range of 1 to 12.")
-    if not 1 <= intensity <= 10:
-        raise ValueError("intensity must be in the range of 1 to 10.")
+    if not 0 <= perturbation_type <= 11:
+        raise ValueError("perturbation_type must be in the range of 0 to 11.")
+    if not 0 <= intensity <= 9:
+        raise ValueError("intensity must be in the range of 0 to 9.")
 
     packed_byte = (perturbation_type << 4) | intensity
     return packed_byte
@@ -787,8 +787,8 @@ def unpack_perturbation_info(packed_byte):
     - packed_byte (int): The packed byte containing the perturbation type and intensity.
 
     Returns:
-    - perturbation_type (int): Perturbation type, ranging from 1 to 12.
-    - intensity (int): Intensity value, ranging from 1 to 10.
+    - perturbation_type (int): Perturbation type, ranging from 0 to 11.
+    - intensity (int): Intensity value, ranging from 0 to 9.
     """
     perturbation_type = packed_byte >> 4
     intensity = packed_byte & 0x0F
