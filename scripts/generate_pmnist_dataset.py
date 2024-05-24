@@ -41,13 +41,13 @@ init_perturbed_mnist_files(
 #                                         4. process CIFAR-10 dataset saving sofmax values label, prediction, pertubation type and level
 #                                         5. Add KL, BD and HI to PMNISt and CIFAR-10 predictions
 #                                         6. Create 2D plots for PMNIST and CIFAR-10
-img_path = 'data/MNIST/raw/train-images-idx3-ubyte'
-lbl_path = 'data/MNIST/raw/train-labels-idx1-ubyte'
-pmnist_img = 'perturbed-train-images-idx3-ubyte'
-pmnist_lbl = 'perturbed-train-labels-idx1-ubyte'
-pmnist_perturbations = 'perturbation-train-levels-idx0-ubyte'
-num_files = 60000
-verbose = False
+# img_path = 'data/MNIST/raw/train-images-idx3-ubyte'
+# lbl_path = 'data/MNIST/raw/train-labels-idx1-ubyte'
+# pmnist_img = 'perturbed-train-images-idx3-ubyte'
+# pmnist_lbl = 'perturbed-train-labels-idx1-ubyte'
+# pmnist_perturbations = 'perturbation-train-levels-idx0-ubyte'
+# num_files = 60000
+# verbose = False
 #gen_pmnist_dataset_all_possibilities(img_path, lbl_path, pmnist_img, pmnist_lbl, pmnist_perturbations, num_files, verbose)
 
 # Only generate testing dataset perturbations
