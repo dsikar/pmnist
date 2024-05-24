@@ -4,3 +4,6 @@ __pycache__
 utils
 # data directory
 data
+# hpc specific
+.python-version
+scripts/outputs/
