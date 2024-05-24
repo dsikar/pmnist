@@ -570,8 +570,8 @@ def gen_pmnist_dataset_all_possibilities(img_path, lbl_path, pmnist_img, pmnist_
             print("Saved 'clean' label to perturbed image dataset: {}".format(perturbed_train_labels_idx1_ubyte))        
         # 5. save the perturbation type and label for the original image to the perturbation training levels dataset
         perturbation_train_levels_idx0_ubyte = pmnist_perturbations  # 'perturbation-train-levels-idx0-ubyte'
-        val = 0xFFFF # NB 255, 255 indicates the original image.
-        num_bytes = 2
+        val = 0xFF # NB 0x0F == 15, 15 assigned to perturbation type and level indicates the original image.
+        num_bytes = 1
         append_bytes_to_file(perturbation_train_levels_idx0_ubyte, val, num_bytes)
         if verbose:
             print("Saved key and level to perturbed levels dataset")
