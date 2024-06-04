@@ -9,3 +9,5 @@ data
 scripts/outputs/
 # data files
 *ubyte
+# temp files
+sanity_checks.py

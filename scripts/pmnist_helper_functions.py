@@ -228,6 +228,34 @@ def display_mnist_img(filename, index, verbose = False):
         image_array = hex_to_numpy_array(img_hex, row_length)
         display_image_with_histogram(image_array)
 
+def get_mnist_img(filename, index, verbose = False):
+    """
+    Get MNIST image at a given index
+
+    Parameters
+    ==========
+    filename: string, the mnist binary file
+    index: the index to display
+    verbose: boolean, display debug info
+
+    Example
+    =========
+    pmnist_img = 'data/MNIST/raw/train-images-idx3-ubyte'  # perturbed-train-images-idx3-ubyte
+    index = 0
+    verbose = False
+    img = get_mnist_img(pmnist_img, index, verbose)
+    """
+    num_bytes = 784 #(28x28)
+    start=16+(index*num_bytes)
+    row_length = 28
+    file_size = os.path.getsize(filename)
+    if file_size < start+num_bytes:
+        print("The specified image index {} is out of bounds for the file.".format(index))
+        sys.exit(1)
+    img_hex = read_bytes_from_file(filename, num_bytes, start, verbose)
+    image_array = hex_to_numpy_array(img_hex, row_length)
+    return        
+
 def display_pmnist_perturbation(filename, index, verbose = True):
   """
   Display image perturbation and level if applicable

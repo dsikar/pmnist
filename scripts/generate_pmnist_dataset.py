@@ -35,7 +35,7 @@ init_perturbed_mnist_files(
         verbose=True)
 
 # process training dataset # STOPPED HERE 0. Change perturbation type and level to a byte value - DONE
-#                                         1. process PMNIST testing dataset saving sofmax values label, prediction, pertubation type and level
+#                                         STOPPED HERE 1. process PMNIST testing dataset saving sofmax values label, prediction, pertubation type and level
 #                                         2. Create perturbations for CIFAR10
 #                                         3. Create perturbed CIFAR10 dataset
 #                                         4. process CIFAR-10 dataset saving sofmax values label, prediction, pertubation type and level
