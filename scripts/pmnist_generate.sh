@@ -1,15 +1,17 @@
 #!/bin/bash
 #SBATCH -D /users/aczd097/git/pmnist/scripts    # Working directory
 #SBATCH --job-name pmnist                      # Job name
+#SBATCH --partition=gengpu                       # Select the correct partition.
+#SBATCH --nodes=1                                  # Run on 1 nodes (each node has 48 cores)
+#SBATCH --ntasks-per-node=1                        # Run one task
+#SBATCH --cpus-per-task=2                          # Use 4 cores, most of the procesing happens on the GPU
+#SBATCH --mem=4GB                                 # Expected ammount CPU RAM needed (Not GPU Memory)
+#SBATCH --time=23:59:59                            # Expected ammount of time to run Time limit hrs:min:sec
+#SBATCH --gres=gpu:2                               # Use two gpus.
+#SBATCH -e results/%x_%j.e                         # Standard output and error log [%j is replaced with the jobid]
+#SBATCH -o results/%x_%j.o                         # [%x with the job name], make sure 'results' folder exists.
 #SBATCH --mail-type=ALL                 # Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=daniel.sikar@city.ac.uk         # Where to send mail
-#SBATCH --nodes=4                                # Run on 4 nodes (each node has 48 cores)
-#SBATCH --ntasks-per-node=48
-#SBATCH --exclusive                              # Exclusive use of nodes
-#SBATCH --mem=0                                  # Expected memory usage (0 means use all available memory)
-#SBATCH --time=24:00:00                          # Time limit hrs:min:sec
-#SBATCH -e outputs/%x_%j.e                         # Standard output and error log [%j is replaced with the jobid]
-#SBATCH -o outputs/%x_%j.o                         # [%x with the job name], make sure 'results' folder exists.
 
 #Enable modules command
 source /opt/flight/etc/setup.sh
